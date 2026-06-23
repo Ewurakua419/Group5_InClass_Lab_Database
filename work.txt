@@ -1,0 +1,18 @@
+MariaDB [(none)]> create database hotelSystem;
+Query OK, 1 row affected (0.012 sec)
+
+create table hotel(hotelNo int(5) Not Null, 
+    -> hotelName varchar(20)
+    -> ,
+    -> city varchar(50),
+    -> Primary key(hotelNo));
+
+MariaDB [hotelSystem]> create table room(roomNo int(5) not null,hotelNo int (5) not null, type varchar(20), price decimal(5,2), primary key(roomNo, hotelNo), foreign key (hotelNo) references hotel(hotelNo));
+Query OK, 0 rows affected (0.115 sec)
+
+MariaDB [hotelSystem]> create table guest(guestNo int(5) not null, guestName varchar(30), guestAddress varchar(50), primary key(guestNo));
+Query OK, 0 rows affected (0.117 sec)
+
+MariaDB [hotelSystem]> create table booking(hotelNo int(5) not null, guestNo int(5) not null, dateFrom date not null, dateTo date, roomNo int(5), primary key(hotelNo, guestNo, dateFrom), foreign key (hotelNo) references hotel(hotelNo), foreign key (guestNo) references guest(guestNo), foreign Key (roomNo) references room(roomNo));
+Query OK, 0 rows affected (0.123 sec)
+
