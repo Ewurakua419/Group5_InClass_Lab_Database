@@ -16,3 +16,16 @@ Query OK, 0 rows affected (0.117 sec)
 MariaDB [hotelSystem]> create table booking(hotelNo int(5) not null, guestNo int(5) not null, dateFrom date not null, dateTo date, roomNo int(5), primary key(hotelNo, guestNo, dateFrom), foreign key (hotelNo) references hotel(hotelNo), foreign key (guestNo) references guest(guestNo), foreign Key (roomNo) references room(roomNo));
 Query OK, 0 rows affected (0.123 sec)
 
+//7.12
+create table archivebooking as select * from booking where dateFrom > '2013-01-01';
+
+//7.13
+create view cheapestHotel as select hotelName from hotel where 
+        hotelNo=(select hotelNo from room, hotel 
+            where hotel.hotelNo =room.hotelNo 
+            group by hotel.hotelNo 
+            order by Avg(price) desc limit 10);
+
+//7.14
+brazil russia india china south africa
+create view bricsGuests as select * from guest where country in('Brazil' ,'Russia', 'India', 'China', 'South Africa');
