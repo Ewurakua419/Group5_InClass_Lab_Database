@@ -29,3 +29,11 @@ create view cheapestHotel as select hotelName from hotel where
 //7.14
 brazil russia india china south africa
 create view bricsGuests as select * from guest where country in('Brazil' ,'Russia', 'India', 'China', 'South Africa');
+
+MariaDB [hotelsystem]> alter table guest add country varchar(30);
+Query OK, 0 rows affected (0.253 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [hotelsystem]> create view bricsGuests as select * from guest where country in('Brazil' ,'Russia', 'India', 'China', 'South Africa');
+Query OK, 0 rows affected (0.092 sec)
+
